@@ -1,3 +1,4 @@
+//	use wrapper
 public class TreeNode{
 	int val;
 	TreeNode left,right;
@@ -31,4 +32,25 @@ public boolean isBalancedTreePart(TreeNode root, RecordData record){
 		return false;
 	record.maxDepth = Math.max(leftMax,rightMax);
 	return true;
+}
+
+//	we can return -1 if not balanced, so we will not need the wrapper
+public boolean isBalancedTree(TreeNode root){
+	int height = checkHeight(root);
+	return height >= 0;
+}
+
+public int checkHeight(TreeNode root){
+	if(root == null)
+		return 0;
+	int leftLength = checkHeight(root.left);
+	if(leftLength < 0)
+		return -1;
+	int rightLength = checkHeight(root.right);
+	if(rightLength < 0)
+		return -1;
+	if(Math.abs(leftLength - rightLength) > 1)
+		return -1;
+	else
+		return Math.max(leftLength, rightLength) + 1;
 }
