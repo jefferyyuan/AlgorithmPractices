@@ -1,4 +1,6 @@
+ //  solution in the first time
 public class Solution {
+
     public int search(int[] A, int target) {
         return searchPart(A, 0, A.length - 1, target);
     }
@@ -40,3 +42,38 @@ public class Solution {
         }
     }
 }
+//  solution in the second time
+/*
+public class Solution {
+    public int search(int[] A, int target) {
+        int start = 0, end = A.length - 1;
+        while(start <= end){
+            if(start == end){
+                if(A[start] == target)
+                    return start;
+                else
+                    return -1;
+            }
+            int mid = (start + end) / 2;
+            if(A[mid] == target)
+                return mid;
+            if(A[mid] >= A[start]){
+                if(target > A[mid])
+                    start = mid + 1;
+                else if(target >= A[start])
+                    end = mid - 1;
+                else
+                    start = mid + 1;
+            } else{
+                if(target < A[mid])
+                    end = mid - 1;
+                else if(target > A[end])
+                    end = mid - 1;
+                else
+                    start = mid + 1;
+            }
+        }
+        return -1;
+    }
+}
+*/
