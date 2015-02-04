@@ -5,6 +5,7 @@ import java.math.*;
 import java.util.regex.*;
 
 public class Solution{
+<<<<<<< HEAD
 	public void init(){
 		Scanner scan = new Scanner(System.in);
 
@@ -15,6 +16,10 @@ public class Solution{
 		
 	}
 	public static void main(String[] args){	
+=======
+
+	public static void main(String[] args){
+>>>>>>> origin/master
 
 	}
 }
