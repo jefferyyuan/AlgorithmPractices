@@ -1,3 +1,4 @@
+//  1st : O(n^2) space
 public class Solution {
     public String longestPalindrome(String s) {
         if(s == null) return null;
@@ -30,6 +31,43 @@ public class Solution {
             }
         }
         return s.substring(maxStart, maxEnd + 1);
+    }  
+}
+
+//  2nd : O(1) space
+public class Solution {
+    public String longestPalindrome(String s) {
+        if(s == null)
+            return null;
+        else if(s.length() <= 1)
+            return s;
+        int maxLength = 1;
+        int startIndex = 0, endIndex = 0;
+        for(int i = 0; i <= s.length() - 1; i++){
+            // i is the center
+            int leftIndex = i, rightIndex = i;
+            while(leftIndex >= 0 && rightIndex < s.length() && s.charAt(leftIndex) == s.charAt(rightIndex)){
+                leftIndex--;
+                rightIndex++;
+            }
+            if(rightIndex - leftIndex - 1 > maxLength){
+                maxLength = rightIndex - leftIndex - 1;
+                startIndex = leftIndex + 1;
+                endIndex = rightIndex - 1;
+            }
+            // i is the left center
+            leftIndex = i;
+            rightIndex = i + 1;
+            while(leftIndex >= 0 && rightIndex < s.length() && s.charAt(leftIndex) == s.charAt(rightIndex)){
+                leftIndex--;
+                rightIndex++;
+            }
+            if(rightIndex - leftIndex - 1 > maxLength){
+                maxLength = rightIndex - leftIndex - 1;
+                startIndex = leftIndex + 1;
+                endIndex = rightIndex - 1;
+            }
+        }
+        return s.substring(startIndex, endIndex + 1);
     }
-    
 }

@@ -1,3 +1,4 @@
+//  1st time : HashMap
 public class Solution {
     public boolean isValidSudoku(char[][] board) {
         int count = 9;
@@ -66,6 +67,39 @@ public class Solution {
                     }
                 }
                 if(!isValid) return false;
+            }
+        }
+        return true;
+    }
+}
+
+// 2nd time: 2015-01-31 boolean array more brief code 
+public class Solution {
+    boolean[][] rowUsed = new boolean[9][9];
+    boolean[][] columnUsed = new boolean[9][9];
+    boolean[][] subUsed = new boolean[9][9];
+    public boolean isValidSudoku(char[][] board) {
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                Arrays.fill(rowUsed[i], false);
+                Arrays.fill(columnUsed[i], false);
+                Arrays.fill(subUsed[i], false);
+            }
+        }
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                if(board[i][j] == '.')
+                    continue;
+                int value = (int)(board[i][j] - '1');
+                if(rowUsed[i][value])
+                    return false;
+                rowUsed[i][value] = true;
+                if(columnUsed[j][value])
+                    return false;
+                columnUsed[j][value] = true;
+                if(subUsed[(i / 3) * 3 + (j / 3)][value])
+                    return false;
+                subUsed[(i / 3) * 3 + (j / 3)][value] = true;
             }
         }
         return true;

@@ -1,3 +1,4 @@
+//  1st: recursive (overflow not considered)
 public class Solution {
     public int compareVersion(String version1, String version2) {
         if(version1 == null && version2 == null) return 0;
@@ -38,5 +39,46 @@ public class Solution {
         if(val1 < val2) return -1;
         else if(val1 > val2) return 1;
         else return compareVersion(next1, next2);
+    }
+}
+
+//  2nd: iterative(based on string comparison, overflow considered)
+
+public class Solution {
+    public int compareVersion(String version1, String version2) {
+        String[] version1Number = version1.split("\\.");
+        String[] version2Number = version2.split("\\.");
+        for(int i = 0; i < Math.max(version1Number.length,  version2Number.length); i++){          
+            int length1 = 0, length2 = 0;
+            int index1 = 0, index2 = 0;
+            if(i < version1Number.length){
+                while(index1 < version1Number[i].length() && version1Number[i].charAt(index1) == '0'){
+                    index1++;
+                }
+                length1 = version1Number[i].length() - index1;
+            }
+            if(i < version2Number.length){
+                while(index2 < version2Number[i].length() && version2Number[i].charAt(index2) == '0'){
+                    index2++;
+                }
+                length2 = version2Number[i].length() - index2;
+            }
+            
+            if(length1 < length2){
+                return -1;
+            } else if(length1 > length2){
+                return 1;
+            } else if(length1 == 0){
+                continue;
+            } else{
+                for(;index1 < version1Number[i].length(); index1++, index2++){
+                    if(version1Number[i].charAt(index1) < version2Number[i].charAt(index2))
+                        return -1;
+                    else if(version1Number[i].charAt(index1) > version2Number[i].charAt(index2))
+                        return 1;
+                }
+            }
+        }
+        return 0;
     }
 }

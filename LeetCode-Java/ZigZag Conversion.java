@@ -1,3 +1,4 @@
+//  1st
 public class Solution {
     public String convert(String s, int nRows) {
         if(s == null || s.length() <= 1 || nRows <= 1)
@@ -29,5 +30,33 @@ public class Solution {
             }
         }
         return String.valueOf(resultArray);
+    }
+}
+
+//  2nd
+public class Solution {
+    public String convert(String s, int nRows) {
+        if(nRows == 1)
+            return s;
+        char[] record = new char[s.length()];
+        int divisor = nRows * 2 - 2;
+        int totalIndex = 0;
+        for(int i = 0; i < nRows; i++){
+            int index = 0;
+            while(true){
+                int tempIndex = divisor * index + i;
+                if(tempIndex >= s.length())
+                    break;
+                record[totalIndex++] = s.charAt(tempIndex);
+                if(i > 0 && i < nRows - 1){
+                    tempIndex = divisor * (index + 1) - i;
+                    if(tempIndex >= s.length())
+                        break;
+                    record[totalIndex++] = s.charAt(tempIndex);
+                }
+                index++;
+            }
+        }
+        return String.valueOf(record);
     }
 }
