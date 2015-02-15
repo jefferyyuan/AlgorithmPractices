@@ -5,17 +5,14 @@ import java.math.*;
 import java.util.regex.*;
 
 public class Solution{
+	int n, m, k;
+	int[][] record;
 	public void init(){
 		Scanner scan = new Scanner(System.in);
-		String input = scan.nextLine();
-		char[] digits = input.toCharArray();
-		int index = 0;
-		if(digits[index] == '9') index++;
-		for(; index < digits.length; index++) {
-			if(digits[index] >= '5')
-				digits[index] = (char)('0' + ('9' - digits[index]));
-		}
-		System.out.println(new String(digits));
+		n = scan.nextInt();
+		m = scan.nextInt();
+		k = scan.nextInt();
+		record = new int[n][m];
 		scan.close();
 	}
 
