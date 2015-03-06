@@ -76,5 +76,6 @@ public class Solution{
 	public static void main(String[] args){	
 		Solution tool = new Solution();
 		tool.init();
+		tool.solve();
 	}
 }
