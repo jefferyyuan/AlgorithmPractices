@@ -52,10 +52,62 @@ public class Solution{
 
    }
 
+   public int gcd(int a, int b) {
+    if(b == 0)
+      return a;
+    return gcd(b, a % b);
+   }
 	public void init(){
 		MyScanner scan = new MyScanner();
       	out = new PrintWriter(new BufferedOutputStream(System.out));
-      
+        int n = scan.nextInt();
+        int m = scan.nextInt();
+        boolean[] boyHappy = new boolean[n];
+        Arrays.fill(boyHappy, false);
+        boolean[] girlHappy = new boolean[m];
+        Arrays.fill(girlHappy, false);
+        int boyHappyCount = scan.nextInt();
+        for(int i = 0; i < boyHappyCount; i++){
+          boyHappy[scan.nextInt()] = true;
+        }
+        int girlHappyCount = scan.nextInt();
+        for (int i = 0; i < girlHappyCount; i++) {
+          girlHappy[scan.nextInt()] = true;
+        }
+        int gcdNumber = gcd(n, m);
+        if (gcdNumber == 1) {
+          if(girlHappyCount + boyHappyCount > 0)
+            out.println("Yes");
+          else
+            out.println("No");
+        } else {
+          boolean isValid = true;
+          for(int i = 0; i < gcdNumber; i++) {
+             boolean hasFound = false;
+             for(int j = i; j < n; j += gcdNumber) {
+               if(boyHappy[j]) {
+                hasFound = true;
+                break;
+               }
+             }
+             if(hasFound) continue;
+             for(int j = i; j < m; j += gcdNumber) {
+               if(girlHappy[j]) {
+                hasFound = true;
+                break;
+               }
+             }
+             if(!hasFound) {
+              isValid = false;
+              break;
+             }
+          }
+          if(isValid) {
+            out.println("Yes");
+          } else {
+            out.println("No");
+          }
+        }
       	// Start writing your solution here. -------------------------------------
    
      	 /*

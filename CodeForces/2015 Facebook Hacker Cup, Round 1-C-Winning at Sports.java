@@ -51,11 +51,46 @@ public class Solution{
       }
 
    }
-
+    int MOD_NUMBER = 1000000007;
 	public void init(){
+        int[][] record = new int[2005][2005];
+        int[][] record2 = new int[2005][2005];
+
+        for (int i = 0; i <= 2000; i++) {
+            record[i][0] = 1;
+        }
+        for (int i = 1; i<= 2000; i++) {
+            for (int j = 1; j<= i; j++) {
+                record[i][j] = record[i][j - 1];
+                if (i - 1 >= j) {
+                    record[i][j] += record[i - 1][j];
+                }
+                record[i][j] %= MOD_NUMBER;
+            }
+        }
+
+        for (int i = 1; i <= 2000; i++) {
+            record2[i][0] = 1;
+        }
+        for (int i = 1; i<= 2000; i++) {
+            for (int j = 1; j<= i; j++) {
+                record2[i][j] = record2[i][j - 1];
+                if (i - 1 > j) {
+                    record2[i][j] += record2[i - 1][j];
+                }
+                record2[i][j] %= MOD_NUMBER;
+            }
+        }
 		MyScanner scan = new MyScanner();
-      	out = new PrintWriter(new BufferedOutputStream(System.out));
-      
+        out = new PrintWriter(new BufferedOutputStream(System.out));
+        int count =  Integer.valueOf(scan.nextLine());
+        for (int i = 0; i < count; i++){
+            String line = scan.nextLine();
+            String[] values = line.split("-");
+            int x = Integer.valueOf(values[0]);
+            int y = Integer.valueOf(values[1]);
+            out.println("Case #" + (i + 1) + ": " + record2[x][y] + " " + record[y][y]);
+        }
       	// Start writing your solution here. -------------------------------------
    
      	 /*
