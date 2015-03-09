@@ -26,32 +26,31 @@ public class Solution{
               }
           }
           return st.nextToken();
-          }
-     
-          int nextInt() {
-              return Integer.parseInt(next());
-          }
-     
-          long nextLong() {
-              return Long.parseLong(next());
-          }
-     
-          double nextDouble() {
-              return Double.parseDouble(next());
-          }
-     
-          String nextLine(){
-              String str = "";
-    	  try {
-    	     str = br.readLine();
-    	  } catch (IOException e) {
-    	     e.printStackTrace();
-    	  }
-    	  return str;
-          }
+      }
+ 
+      int nextInt() {
+          return Integer.parseInt(next());
+      }
+ 
+      long nextLong() {
+          return Long.parseLong(next());
+      }
+ 
+      double nextDouble() {
+          return Double.parseDouble(next());
+      }
+ 
+      String nextLine(){
+          String str = "";
+	  try {
+	     str = br.readLine();
+	  } catch (IOException e) {
+	     e.printStackTrace();
+	  }
+	  return str;
+      }
 
    }
-
 	public void init(){
 		MyScanner scan = new MyScanner();
       	out = new PrintWriter(new BufferedOutputStream(System.out));
@@ -70,6 +69,17 @@ public class Solution{
       	*/
 
       	// Stop writing your solution here. -------------------------------------
+
+        int n = scan.nextInt();
+        int m = scan.nextInt();
+        if (m <= n / 2) {
+          out.println(m);
+        } else if (m >= 2 * n) {
+          out.println(n);
+        } else {
+          int k = 2 * (2 * n - m) / 3;
+          out.println(k / 2 + Math.min((n - k), (m - k / 2) / 2));
+        }
       	out.close();
 	}
 

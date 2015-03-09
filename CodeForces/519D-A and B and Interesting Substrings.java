@@ -26,29 +26,29 @@ public class Solution{
               }
           }
           return st.nextToken();
-          }
-     
-          int nextInt() {
-              return Integer.parseInt(next());
-          }
-     
-          long nextLong() {
-              return Long.parseLong(next());
-          }
-     
-          double nextDouble() {
-              return Double.parseDouble(next());
-          }
-     
-          String nextLine(){
-              String str = "";
-    	  try {
-    	     str = br.readLine();
-    	  } catch (IOException e) {
-    	     e.printStackTrace();
-    	  }
-    	  return str;
-          }
+      }
+ 
+      int nextInt() {
+          return Integer.parseInt(next());
+      }
+ 
+      long nextLong() {
+          return Long.parseLong(next());
+      }
+ 
+      double nextDouble() {
+          return Double.parseDouble(next());
+      }
+ 
+      String nextLine(){
+          String str = "";
+	  try {
+	     str = br.readLine();
+	  } catch (IOException e) {
+	     e.printStackTrace();
+	  }
+	  return str;
+      }
 
    }
 
@@ -70,6 +70,30 @@ public class Solution{
       	*/
 
       	// Stop writing your solution here. -------------------------------------
+        ArrayList<HashMap<Long, Integer>> record = new ArrayList<HashMap<Long, Integer>>();
+        for (int i = 0; i < 26; i++) {
+            record.add(new HashMap<Long, Integer>());
+        }
+        Long sum = (long)0;
+        long result = 0;
+        int[] points = new int[26];
+        for (int i = 0; i < 26; i++) {
+            points[i] = scan.nextInt();
+        }
+        String line = scan.nextLine();
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            HashMap<Long, Integer> map = record.get(c - 'a');
+            if (map.containsKey(sum)) {
+                result += (long)map.get(sum);
+            }
+            sum += (long)points[c - 'a'];
+            if (!map.containsKey(sum)) {
+                map.put(sum, 0);
+            }
+            map.put(sum, map.get(sum) + 1);
+        }
+        out.println(result);
       	out.close();
 	}
 
