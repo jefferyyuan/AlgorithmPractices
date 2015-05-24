@@ -70,9 +70,23 @@ public class Solution{
          */
 
         // Stop writing your solution here. -------------------------------------
+        int n = scan.nextInt();
+        int[] input = new int[n];
+        for (int i = 0; i < n; i++) {
+            input[i] = scan.nextInt();
+        }
+        Arrays.sort(input);
+        int count = 0;
+        long record = 0;
+        for (int i = 0; i < n; i++) {
+            if (input[i] >= record) {
+                count++;
+                record += input[i];
+            }
+        }
+        out.println(count);
         out.close();
     }
-
     public static void main(String[] args){ 
         Solution tool = new Solution();
         tool.init();

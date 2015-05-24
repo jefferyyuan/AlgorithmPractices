@@ -4,7 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-public class Solution{
+public class Problem1A{
     //-----------PrintWriter for faster output---------------------------------
     public static PrintWriter out;
 
@@ -70,11 +70,41 @@ public class Solution{
          */
 
         // Stop writing your solution here. -------------------------------------
+        int caseCount = scan.nextInt();
+        for (int i = 0; i < caseCount; i++) {
+            int n = scan.nextInt();
+            int[] input = new int[n];
+            for (int j = 0; j < n; j++) {
+                input[j] = scan.nextInt();
+            }
+            // compute method1
+            int result1 = 0;
+            for (int j = 1; j < n; j++) {
+                if (input[j] < input[j - 1]) {
+                    result1 += input[j - 1] - input[j];
+                }
+            }
+
+            //compute method2
+            int maxRate = 0;
+            for (int j = 1; j < n; j++) {
+                if (input[j] < input[j - 1]) {
+                    maxRate = Math.max(maxRate, input[j - 1] - input[j]);
+                }
+            }
+            int result2 =  maxRate * (input.length - 1);
+            for (int j = 0; j < n - 1; j++) {
+                if (input[j] < maxRate ) {
+                    result2 -= maxRate - input[j];
+                }
+            }
+            out.println("Case #" + (i + 1) + ": " + result1 + " " + result2);
+        }
         out.close();
     }
 
     public static void main(String[] args){ 
-        Solution tool = new Solution();
+        Problem1A tool = new Problem1A();
         tool.init();
     }
 }

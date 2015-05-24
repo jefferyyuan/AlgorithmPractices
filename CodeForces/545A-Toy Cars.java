@@ -70,6 +70,38 @@ public class Solution{
          */
 
         // Stop writing your solution here. -------------------------------------
+        int count = scan.nextInt();
+        int[][] record = new int[count][count];
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < count; j++) {
+                record[i][j] = scan.nextInt();
+            }
+        }
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        for (int i = 0; i < count; i++) {
+            boolean isValid = true;
+            for (int j = 0; j < count; j++) {
+                if (j == i) {
+                    continue;
+                }
+                if (record[i][j] % 2 != 0) {
+                    isValid = false;
+                    break;
+                }
+            }
+            if (isValid) {
+                result.add(i + 1);
+            }
+        }
+        out.println(result.size());
+        for (int i = 0; i < result.size(); i++) {
+            out.print(result.get(i));
+            if (i != result.size() - 1) {
+                out.print(" ");
+            } else {
+                out.println();
+            }
+        }
         out.close();
     }
 

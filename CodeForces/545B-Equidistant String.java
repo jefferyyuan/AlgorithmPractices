@@ -70,6 +70,27 @@ public class Solution{
          */
 
         // Stop writing your solution here. -------------------------------------
+        String[] input = new String[2];
+        input[0] = scan.nextLine();
+        input[1] = scan.nextLine();
+        int turn = 0;
+        char[] result = new char[input[0].length()];
+        for (int i = 0; i < input[0].length(); i++) {
+            if (input[0].charAt(i) == input[1].charAt(i)) {
+                result[i] = input[0].charAt(i);
+            } else {
+                result[i] = input[turn].charAt(i);
+                turn = 1 - turn;
+            }
+        }
+        if (turn == 1) {
+            out.println("impossible");
+        } else {
+            for (int i = 0; i < result.length; i++) {
+                out.print(result[i]);
+            }
+            out.println();
+        }
         out.close();
     }
 

@@ -70,9 +70,45 @@ public class Solution{
          */
 
         // Stop writing your solution here. -------------------------------------
+        int n = scan.nextInt();
+        int[] x = new int[n];
+        int[] h = new int[n];
+        int maxX = 0;
+        for (int i = 0; i < n; i++) {
+            x[i] = scan.nextInt();
+            h[i] = scan.nextInt();
+            maxX = max(maxX, x[i] + h[i]);
+        }
+        HashMap<Long, Integer> record = new HashMap<Long, Integer>();
+        out.println(dp(x, h, record, n - 1, maxX));
         out.close();
     }
+    public int dp(int[] x, int[] h, HashMap<Long, Integer> record, int pos, int limit) {
+        if (pos < 0) {
+            return 0;
+        }
+        long key = pos;
+        key = key << 10;
+        key += limit;
+        if (record.containsKey(key)) {
+            return record.get(key);
+        }
+        int result = 0;
+        if (limit >= x[pos] + h[pos]) {
+            result = max(result, dp(x, h , record, pos - 1, x[pos] - 1) + 1);
+        }  else {   
+            result = max(result, dp(x, h, record, pos - 1, x[pos] - 1));
+        }
+        if (!(pos > 0 && x[pos] - h[pos] - 1 < x[pos - 1])) {
+            result = max(result, dp(x, h, record, pos - 1, x[pos] - h[pos] - 1) + 1);
+        }
+        record.put(key, result);
+        return result;
+    }
 
+    public int max(int v1, int v2) {
+        return v1 > v2 ? v1 : v2;
+    }
     public static void main(String[] args){ 
         Solution tool = new Solution();
         tool.init();
