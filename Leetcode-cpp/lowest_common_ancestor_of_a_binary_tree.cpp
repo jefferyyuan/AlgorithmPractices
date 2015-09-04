@@ -10,26 +10,22 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        auto result = lcaHelper(root, p, q);
-        return result.first;
-    }
-    
-    pair<TreeNode*, int> lcaHelper(TreeNode *root, TreeNode* p, TreeNode *q) {
-        if (root == nullptr) 
-            return make_pair(nullptr, 0);
-        int count = 0;
-        if (root == p || root == q) ++count;
-        auto leftResult = lcaHelper(root->left, p, q);
-        if (leftResult.first != nullptr)
-            return leftResult;
-        auto rightResult = lcaHelper(root->right, p, q);
-        if (rightResult.first != nullptr)
-            return rightResult;
-        count += leftResult.second + rightResult.second;
-        if (count == 2)
-            return make_pair(root, count);
-        else
-            return make_pair(nullptr, count);
-        
+        if (root == nullptr) return nullptr;
+        bool has_p = false;
+        bool has_q = false;
+        if (root == p) has_p = true;
+        if (root == q) has_q = true;
+        TreeNode* l_result = lowestCommonAncestor(root->left, p, q);
+        if (l_result != nullptr && l_result != p && l_result != q) return l_result;
+        if (l_result == p) has_p = true;
+        if (l_result == q) has_q = true;
+        TreeNode* r_result = lowestCommonAncestor(root->right, p, q);
+        if (r_result != nullptr && r_result != p && r_result != q) return r_result;
+        if (r_result == p) has_p = true;
+        if (r_result == q) has_q = true;
+        if (has_p && has_q) return root;
+        if (has_p) return p;
+        if (has_q) return q;
+        return nullptr;
     }
 };
